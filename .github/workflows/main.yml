@@ -1,0 +1,30 @@
+on: [ push ]
+
+jobs:
+  deploy_dev:
+    runs-on: ubuntu-latest
+    name: Deploy Dev Applications
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy Dev Application
+        uses: shipa-corp/shipa-gh-action@0.0.1
+        env:
+          SHIPA_TOKEN: ${{ secrets.SHIPA_TOKEN }}
+          SHIPA_HOST: ${{ secrets.SHIPA_HOST }}
+        with:
+          shipa-action: './dev-app/dev-app.yml'
+
+  deploy_prod:
+    runs-on: ubuntu-latest
+    name: Deploy Production Apps
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Deploy Prod Application
+        uses: shipa-corp/shipa-gh-action@0.0.1
+        env:
+          SHIPA_TOKEN: ${{ secrets.SHIPA_TOKEN }}
+          SHIPA_HOST: ${{ secrets.SHIPA_HOST }}
+        with:
+          shipa-action: './prod-app/prod-app1.yml'
